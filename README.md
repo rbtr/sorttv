@@ -19,7 +19,7 @@ docker run --rm -it rbtr/sorttv --dry-run
 ```
 
 ### Linux E2E Example
-If you have an `unsorted` directory where media is continuously added, and a `tv` directory where it should be sorted to automatically, this can all be wired up together with some `systemd` tricks to provide a hands-off autosorting pipeline:
+If you have an `unsorted` directory where media is continuously added, and a `tv` directory where it should be sorted to, this can all be wired up together with some `systemd` tricks to provide a hands-off autosorting pipeline:
 
 ```
 # /etc/systemd/system/sorttv.path
@@ -47,3 +47,5 @@ ExecStart=/bin/bash -c "docker run --rm -v /unsorted:/unsorted:z -v /tv:/tv:z rb
 # We could use a config file here instead of cli flags as
 # ExecStart=... -v /path/to/config:/sorttv/sorttv.conf ...
 ```
+
+With these systemd files in place, `systemd enable sorttv.path`. Then, media files added to `unsorted` will trigger the sorttv execution.
